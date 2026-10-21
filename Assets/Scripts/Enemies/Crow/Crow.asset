@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Crow
   m_EditorClassIdentifier: 
   patrolSpeed: 2.5
-  groundCheckDistance: 0.7
-  wallCheckDistance: 0.5
+  groundCheckDistance: 0.1
+  wallCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

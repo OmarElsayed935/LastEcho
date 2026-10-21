@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    //Variables
+    public int FacingDirection{get;private set;} = 1;
+
+    //Components
     public Rigidbody2D RB {get;private set;}
     public EnemyConfig Config;
     public Enemy_Sense Senses{get; private set;}
@@ -21,4 +25,12 @@ public class Enemy : MonoBehaviour
 
     private void Update() => StateMachine.CurrentState?.Update();
     private void FixedUpdate() => StateMachine.CurrentState?.FixedUpdate();
+
+    public void Flip(){
+        FacingDirection *= -1;
+
+        Vector3 scale = transform.localScale;
+        scale.x = FacingDirection;
+        transform.localScale = scale;
+    }
 }

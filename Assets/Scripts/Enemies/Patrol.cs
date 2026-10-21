@@ -9,9 +9,9 @@ public class Patrol : State
 
     public override void FixedUpdate(){
         if (senses.IsHittingWall() || senses.IsAtCliff()){
-            Debug.Log("I found a Cliff");
+            enemy.Flip();
             return;
         }
-        rb.velocity = new Vector2(config.patrolSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(config.patrolSpeed * enemy.FacingDirection, rb.velocity.y);
     }
 }

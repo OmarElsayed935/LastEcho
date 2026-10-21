@@ -10,10 +10,13 @@ public abstract class State
 
     protected Enemy_Sense senses;
 
+    protected Enemy enemy;
+
     protected State(Enemy enemy){
             rb = enemy.RB;
             config = enemy.Config;
             senses = enemy.Senses;
+            this.enemy = enemy;
     }
 
     public virtual void Enter(){

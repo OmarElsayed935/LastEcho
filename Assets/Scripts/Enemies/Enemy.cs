@@ -9,12 +9,24 @@ public class Enemy : MonoBehaviour
 
     //Components
     public Rigidbody2D RB {get;private set;}
+    public Animator Anim {get;private set;}
     public EnemyConfig Config;
     public Enemy_Sense Senses{get; private set;}
     public StateMachine StateMachine{get; private set;}
+    protected StateMachine stateMachine;
+
+    public State(Enemy enemy){
+            RB = enemy.RB;
+            Anim = enemy.Anim;
+            Config = enemy.Config;
+            Senses = enemy.Senses;
+            this.enemy = enemy;
+            stateMachine = enemy.StateMachine;
+    }
 
     private void Awake(){
         RB = GetComponent<Rigidbody2D>();
+        Anim = GetComponent<Animator>();
         StateMachine = new StateMachine();
         Senses = GetComponent<Enemy_Sense>();
     }

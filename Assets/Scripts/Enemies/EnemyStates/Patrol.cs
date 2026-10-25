@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Patrol : State
 {
+    protected override string AnimBoolName => "isWalking";
     private const float FLIP_COOLDOWN = 0.15f;   // tune this
     private float flipTimer;
 
@@ -11,6 +12,11 @@ public class Patrol : State
 
     public override void FixedUpdate()
     {
+        if (senses.GetChaseTarget() != null)
+        {
+            stateMachine.ChangeState(new ChaseState(enemy));
+            return;
+        }
         if (flipTimer > 0f)
             flipTimer -= Time.fixedDeltaTime;
 

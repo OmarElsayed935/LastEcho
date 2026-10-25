@@ -8,6 +8,7 @@ public class Enemy_Sense : MonoBehaviour
     public Transform groundCheck;
     public Transform wallCheck;
     public Enemy enemy;
+    public Transform attackPoint;
 
     private void Awake()
     {
@@ -36,10 +37,19 @@ public class Enemy_Sense : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(wallCheck.position,
             wallCheck.position + Vector3.left * config.wallCheckDistance);
+
+        //chase check
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(attackPoint.position, config.chaseRange);
     }
 
     public bool IsAtCliff() => !Physics2D.Raycast(groundCheck.position,Vector2.down,config.groundCheckDistance,config.groundLayer);        
     public bool IsHittingWallright() => Physics2D.Raycast(wallCheck.position,Vector2.right,config.wallCheckDistance,config.wallLayer);
     public bool IsHittingWallleft() => Physics2D.Raycast(wallCheck.position,Vector2.left,config.wallCheckDistance,config.wallLayer);
+    public Transform GetChaseTarget(){
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, config.chaseRange, config.targetLayer);
 
+        if (hits.Length == 0) return null;
+        return hits[0].transform;
+    }
 }

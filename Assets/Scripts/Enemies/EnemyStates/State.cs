@@ -6,6 +6,9 @@ public abstract class State
 {
     protected Rigidbody2D rb;
 
+    protected Animator anim;
+    protected virtual string AnimBoolName => null;
+    
     protected EnemyConfig config;
 
     protected Enemy_Sense senses;
@@ -14,13 +17,17 @@ public abstract class State
 
     protected State(Enemy enemy){
             rb = enemy.RB;
+            anim = enemy.Anim;
             config = enemy.Config;
             senses = enemy.Senses;
             this.enemy = enemy;
     }
 
     public virtual void Enter(){
-
+        if (!string.IsNullOrEmpty(AnimBoolName)) 
+        {
+            anim.SetBool(AnimBoolName, true);
+        }
     }
 
     public virtual void Update(){}
@@ -30,6 +37,9 @@ public abstract class State
     }
 
     public virtual void Exit(){
-
+        if (!string.IsNullOrEmpty(AnimBoolName)) 
+        {
+            anim.SetBool(AnimBoolName, false);
+        }
     }
 }

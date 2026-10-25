@@ -13,5 +13,7 @@ public class EnemyConfig : ScriptableObject
 
     public LayerMask groundLayer;
     public LayerMask wallLayer;
-    
+
+    public float chaseRange = 5f;
+    public LayerMask targetLayer;
 }

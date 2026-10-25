@@ -15,12 +15,16 @@ public abstract class State
 
     protected Enemy enemy;
 
+    protected StateMachine stateMachine;
+
+
     protected State(Enemy enemy){
             rb = enemy.RB;
             anim = enemy.Anim;
             config = enemy.Config;
             senses = enemy.Senses;
             this.enemy = enemy;
+            stateMachine = enemy.StateMachine;
     }
 
     public virtual void Enter(){

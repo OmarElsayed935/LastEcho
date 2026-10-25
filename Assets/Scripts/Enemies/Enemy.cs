@@ -13,16 +13,6 @@ public class Enemy : MonoBehaviour
     public EnemyConfig Config;
     public Enemy_Sense Senses{get; private set;}
     public StateMachine StateMachine{get; private set;}
-    protected StateMachine stateMachine;
-
-    public State(Enemy enemy){
-            RB = enemy.RB;
-            Anim = enemy.Anim;
-            Config = enemy.Config;
-            Senses = enemy.Senses;
-            this.enemy = enemy;
-            stateMachine = enemy.StateMachine;
-    }
 
     private void Awake(){
         RB = GetComponent<Rigidbody2D>();
@@ -38,6 +28,11 @@ public class Enemy : MonoBehaviour
     private void Update() => StateMachine.CurrentState?.Update();
     private void FixedUpdate() => StateMachine.CurrentState?.FixedUpdate();
 
+    public void FaceTarget(Transform target){
+        float offset = target.position.x - transform.position.x;
+        int direction = offset > 0 ? 1 : -1;
+        if (direction != FacingDirection) Flip();
+    }
     public void Flip(){
         FacingDirection *= -1;
 

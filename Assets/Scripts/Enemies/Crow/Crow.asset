@@ -21,3 +21,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  chaseSpeed: 7
+  chaseRange: 6
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 512

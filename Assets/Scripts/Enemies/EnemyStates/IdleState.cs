@@ -24,6 +24,12 @@ public class IdleState : State
 
         enemy.FaceTarget(target);
 
+        if (senses.IsInMeleeRange(target) && combat.CanMeleeAttack()){
+            stateMachine.ChangeState(new MeleeAttack(enemy));
+            return;
+        }
+
+
         float distance = Mathf.Abs(target.position.x - enemy.transform.position.x);
         if (distance <= config.turnThreshold)
         {

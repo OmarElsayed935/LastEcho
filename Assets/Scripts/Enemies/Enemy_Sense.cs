@@ -41,11 +41,22 @@ public class Enemy_Sense : MonoBehaviour
         //chase check
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(attackPoint.position, config.chaseRange);
+
+        //melee check
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(attackPoint.position, config.meleeRange);
     }
 
     public bool IsAtCliff() => !Physics2D.Raycast(groundCheck.position,Vector2.down,config.groundCheckDistance,config.groundLayer);        
     public bool IsHittingWallright() => Physics2D.Raycast(wallCheck.position,Vector2.right,config.wallCheckDistance,config.wallLayer);
     public bool IsHittingWallleft() => Physics2D.Raycast(wallCheck.position,Vector2.left,config.wallCheckDistance,config.wallLayer);
+    
+    public bool IsInMeleeRange(Transform target){
+        if (!target) return false;
+        float distance = Vector2.Distance(target.position, attackPoint.position);
+        return distance <= config.meleeRange;
+    }
+
     public Transform GetChaseTarget(){
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, config.chaseRange, config.targetLayer);
 

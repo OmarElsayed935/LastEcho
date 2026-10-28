@@ -20,6 +20,13 @@ public class ChaseState : State
 
         enemy.FaceTarget(target);
 
+        //Check if we can attack
+
+        if (senses.IsInMeleeRange(target) && combat.CanMeleeAttack()){
+            stateMachine.ChangeState(new MeleeAttack(enemy));
+            return;
+        }
+
         //Check if we have reached our target
         float distance = Mathf.Abs(target.position.x - enemy.transform.position.x);
         if (distance <= config.turnThreshold)
